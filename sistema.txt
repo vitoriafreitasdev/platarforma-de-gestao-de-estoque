@@ -1,0 +1,3 @@
+sistema de gestao de estoque 
+
+vai criar, editar, deletar e mostrar os produtos do sistema 

@@ -3,27 +3,33 @@ const {Schema} = mongoose
 
 const StockSchema = new Schema(
     {
-        name: {
+        name: 
+        {
             type: String,
-            require: true 
+            required: true 
         },
         unitsAvailable: 
         {
             type: Number,
-            require: true
+            required: true
         },
         priceUnit:
         {
             type: Number,
-            require: true 
+            required: true 
         },
         isAvailable:
         {
             type: Boolean,
-            require: true
+            required: true
         }
     },
     {timestamps: true}
 )
 
-module.exports = StockSchema
+const Stock = mongoose.model("Stock", StockSchema)
+
+module.exports = {
+    Stock,
+    StockSchema
+}

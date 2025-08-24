@@ -6,6 +6,11 @@ app.use(cors())
 
 const conm = require("./db/conm.js")
 conm()
+
+const routes = require("./routes/router.js")
+
+app.use("/", routes)
+
 app.listen(3000, function(){
     console.log("Servidor online.")
 })
