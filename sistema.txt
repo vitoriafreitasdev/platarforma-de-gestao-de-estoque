@@ -1,3 +1,4 @@
 sistema de gestao de estoque 
 
 vai criar, editar, deletar e mostrar os produtos do sistema 
+fazer o model do usuario: Cadastro, login, poder pedir pedidos, se estiverem disponiveis.
