@@ -1,7 +1,5 @@
 const {Stock} = require("../models/Stock")
 
-// aqui vai ser criado o controller do estoque 
-// tem que fazer: criar, editar, deletar, pegar e pegar unico. O estoque tem produtos, cada produto tem: nome, unidadeDisponivel, precoUnidade, seEstaDiponivel
 
 const stockController = {
     create: async (req, res) => {
@@ -21,7 +19,7 @@ const stockController = {
             res.status(201).json({msg: "Produto criado com sucesso", productCreate})
         } catch (error) {
             console.log(error)
-            res.status(500).json({msg: "Houve um erro no sistema, tente novamente mais tarde"})
+            res.status(500).json({msg: "Houve um erro no sistema, tente novamente mais tarde."})
         }
     },
     getAllProducts: async (req, res) => {
@@ -30,7 +28,7 @@ const stockController = {
             res.json(products)
         } catch (error) {
             console.log(error)
-            res.status(500).json({msg: "Houve um erro no sistema, tente novamente mais tarde"})
+            res.status(500).json({msg: "Houve um erro no sistema, tente novamente mais tarde."})
         }
     },
     getOneProduct: async (req, res) => {
@@ -45,7 +43,7 @@ const stockController = {
             res.json(product)
         } catch (error) {
             console.log(error)
-            res.status(500).json({msg: "Houve um erro no sistema, tente novamente mais tarde"})
+            res.status(500).json({msg: "Houve um erro no sistema, tente novamente mais tarde."})
         }
     },
     edit: async (req, res) => {
@@ -69,7 +67,7 @@ const stockController = {
 
         } catch (error) {
             console.log(error)
-            res.status(500).json({msg: "Houve um erro no sistema, tente novamente mais tarde"})
+            res.status(500).json({msg: "Houve um erro no sistema, tente novamente mais tarde."})
         }
     },
     delete: async (req, res) => {
@@ -86,7 +84,7 @@ const stockController = {
             
         } catch (error) {
             console.log(error)
-            res.status(500).json({msg: "Houve um erro no sistema, tente novamente mais tarde"})
+            res.status(500).json({msg: "Houve um erro no sistema, tente novamente mais tarde."})
         }
     }
 
