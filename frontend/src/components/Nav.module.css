@@ -1,0 +1,20 @@
+.nav{
+    background-color: black;
+    padding: 1rem;
+}
+.menucontainer{
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+}
+.link {
+    text-decoration: none;
+    color: #FFFDF7;
+    font-weight: bolder;
+    font-size: larger;
+    opacity: 1;
+}
+
+.link:hover {
+    opacity: 0.9;
+}
