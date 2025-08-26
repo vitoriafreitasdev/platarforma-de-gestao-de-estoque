@@ -3,7 +3,7 @@ const userController = require("../controllers/userController")
 const tokenCheck = require("../utils/tokenCheck")
 
 
-router.route("/user/cadastro").post((req, res) => userController.register(req, res))
+router.route("/user/register").post((req, res) => userController.register(req, res))
 
 router.route("/user/login").post((req, res) => userController.login(req, res))
 
@@ -11,6 +11,9 @@ router.route("/user/:id").get(tokenCheck, (req, res) => userController.privateRo
 
 router.route("/user/:id/addproducts").patch((req, res) => userController.selectProducts(req, res))
 
-// fazer os testes com a rota de addproducts
+router.route("/user/:id/deleteproducts").delete((req, res) => userController.deleteProducts(req, res))
+
+
+
 
 module.exports = router

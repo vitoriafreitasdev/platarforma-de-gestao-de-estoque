@@ -107,7 +107,27 @@ const userController = {
 
     },
     deleteProducts: async (req, res) => {
+        try {
+            const id = req.params.id 
 
+            const user = await User.findById(id)
+
+            if(!user) res.status(404).json({msg: "Usuário não encotrado."})
+
+
+            const {productId} = req.body 
+
+            const productsFilter = user.products.filter((p) => p._id.toString() !== productId)
+
+            const userUptade = await User.findByIdAndUpdate(id,
+            { products: productsFilter },
+            { new: true })
+
+            res.status(200).json({msg: "Produto excluído", userUptade})
+        } catch (error) {
+            console.log(error)
+            res.status(500).json({msg: "Erro no sistema, tente novamente mais tarde."})
+        }
     }
 }
 
