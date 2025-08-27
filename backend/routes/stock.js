@@ -1,7 +1,11 @@
 const router = require("express").Router()
 const stockController = require("../controllers/stockController")
 const upload = require("../utils/upload")
+/*
 
+adicionar um token nas rotas de postar, atualizar e deletar, apenas usuarios administradores logados podem  fazer isso.
+
+*/ 
 router.route("/estoque").post(upload.single("image"), (req, res, next) => {
     const image = req.file 
 
