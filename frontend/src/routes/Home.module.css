@@ -14,6 +14,7 @@ table{
     width: 80vw;
     border-collapse: collapse;
     position: relative;
+    background-color: #D2D6EF;
 }
 td, th{
     border: 1px solid black;
@@ -22,12 +23,23 @@ td, th{
 }
 
 thead{
-    background-color: #383838;
+    background-color: #006494;
     color: white;
 }
 
 .img{
     width: 80px;
     height: 80px;
+    
     object-fit: contain;
+}
+td p {
+    width: 90px;
+    height: 90px;
+    border-radius: 5px;
+    background-color: white;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

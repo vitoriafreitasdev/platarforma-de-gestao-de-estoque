@@ -1,7 +1,7 @@
 
 import classes from "./Home.module.css"
 
-import image from "../images/download.jpeg"
+
 
 import { useState, useEffect } from "react"
 
@@ -27,7 +27,7 @@ const Home = () => {
 console.log(products)
   return (
     <div className={classes.home}>
-        <h2>Produtos do Estoque: </h2> 
+        <h2>Produtos no estoque: </h2> 
         <div className={classes.productscontainer}>
           
           {
@@ -44,7 +44,7 @@ console.log(products)
                       </thead>
                     <tbody >
                       <tr>
-                        <td><img className={classes.img} src={image} alt="teste" /></td>
+                        <td><p><img className={classes.img} src={`${systemFetch.defaults.baseURL}/${p.src}`} alt="teste" /></p></td>
                         <td>{p.name}</td>
                         <td>{p.priceUnit}</td>
                         <td>{p.unitsAvailable}</td>
