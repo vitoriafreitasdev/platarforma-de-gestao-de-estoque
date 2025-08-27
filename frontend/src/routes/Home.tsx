@@ -1,5 +1,7 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+
 import classes from "./Home.module.css"
+
+import image from "../images/download.jpeg"
 
 import { useState, useEffect } from "react"
 
@@ -16,7 +18,6 @@ const Home = () => {
           const res = await systemFetch.get("/estoque")
           setProducts(res.data)
         }
-
         loadProducts()
         
     } catch (error) {
@@ -26,31 +27,39 @@ const Home = () => {
 console.log(products)
   return (
     <div className={classes.home}>
-
-        <h1>Produtos do Estoque: </h1> 
-
+        <h2>Produtos do Estoque: </h2> 
         <div className={classes.productscontainer}>
-
+          
           {
             products ? (
               products.map((p: ProductsProps) => (
-                <div key={p._id}>
-                    <h2>Nome: {p.name}</h2>
-                    <p>Preço por unidade: {p.priceUnit}</p>
-                    <p>Unidades disponíveis: {p.unitsAvailable}</p>
-                    <p>Está disponível: {p.isAvailable ? "sim" : "não"}</p>
+                <div key={p._id} >
+                    <table >
+                      <thead>
+                        <th scope="col">Imagem</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Preço por unidade</th>
+                        <th scope="col">Unidades disponíveis</th>
+                        <th scope="col">Está disponível</th>
+                      </thead>
+                    <tbody >
+                      <tr>
+                        <td><img className={classes.img} src={image} alt="teste" /></td>
+                        <td>{p.name}</td>
+                        <td>{p.priceUnit}</td>
+                        <td>{p.unitsAvailable}</td>
+                        <td>{p.isAvailable ? "sim" : "não"}</td>
+                      </tr>
+                    </tbody>
+                    </table>
                 </div>
-
               ))
             ) : (
-
               <div>
                   <p>Carregando...</p>
               </div>
             )
-
           }
-          
         </div>     
 
     </div>
