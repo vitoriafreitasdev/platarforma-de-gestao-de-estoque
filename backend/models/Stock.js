@@ -3,6 +3,10 @@ const {Schema} = mongoose
 
 const StockSchema = new Schema(
     {
+        src: {
+            type: String,
+            required: true
+        },
         name: 
         {
             type: String,

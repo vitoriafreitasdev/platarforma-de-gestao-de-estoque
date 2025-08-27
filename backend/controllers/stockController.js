@@ -1,4 +1,5 @@
 const {Stock} = require("../models/Stock")
+const removedImage = require("../utils/removeImage")
 
 
 const stockController = {
@@ -6,13 +7,15 @@ const stockController = {
         try {
             const {name, unitsAvailable, priceUnit, isAvailable} = req.body
 
+            const src = `images/${req.file.filename}`
+
             const productExist = await Stock.findOne({name: name})
 
             if(productExist){
                 return res.status(422).json({msg: "Produto com esse nome já existe."})
             }
 
-            const product = {name, unitsAvailable, priceUnit, isAvailable}
+            const product = {src, name, unitsAvailable, priceUnit, isAvailable}
 
             const productCreate = await Stock.create(product)
 
@@ -50,8 +53,23 @@ const stockController = {
         try {
             const id = req.params.id 
 
-            const editProduct = {}
+            
+            const oldProduct = await Stock.findById(id)
+            if(!oldProduct){
+                res.status(404).json({msg: "produto não encontrado."})
+            }
+            let src = null 
 
+            if(req.file) {
+                src = `images/${req.file.filename}`
+            }
+
+            if(src) {
+                removedImage(oldProduct)
+            }
+
+            const editProduct = {}
+            if (src) editProduct.src = src 
             if (req.body.name) editProduct.name = req.body.name
             if (req.body.unitsAvailable) editProduct.unitsAvailable = req.body.unitsAvailable
             if (req.body.priceUnit) editProduct.priceUnit = req.body.priceUnit
@@ -71,6 +89,7 @@ const stockController = {
         }
     },
     delete: async (req, res) => {
+        /* atualizar esse aqui, agora tem imagens, usar o remove image */
         try {
             const id = req.params.id 
             
@@ -79,6 +98,8 @@ const stockController = {
             if(!product){
                 res.status(404).json({msg: "produto não encontrado."})
             }
+
+            removedImage(product)
 
             res.status(201).json({msg: "Produto deletado"})
             

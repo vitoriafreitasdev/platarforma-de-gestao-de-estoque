@@ -1,0 +1,42 @@
+POST http://localhost:3000/estoque
+Content-Type: multipart/form-data; boundary=----MyBoundary
+
+------MyBoundary
+Content-Disposition: form-data; name="image"; filename="3090.jpg"
+Content-Type: image/jpeg
+
+< C:/Users/vitor/OneDrive/Imagens/Saved Pictures/monitor.jpg
+------MyBoundary
+Content-Disposition: form-data; name="name"
+
+KOORUI Monitor
+------MyBoundary
+Content-Disposition: form-data; name="unitsAvailable"
+
+11
+------MyBoundary
+Content-Disposition: form-data; name="priceUnit"
+
+1700
+------MyBoundary
+Content-Disposition: form-data; name="isAvailable"
+
+true
+------MyBoundary--
+
+
+
+
+###
+PATCH http://localhost:3000/estoque/68af2172e9c69a38ec310f10
+Content-Type: multipart/form-data; boundary=----MyBoundary
+
+------MyBoundary
+Content-Disposition: form-data; name="name"
+
+PS5 Slim
+------MyBoundary--
+
+###
+
+DELETE  http://localhost:3000/estoque/68af35b4833e1d4080f93d90
