@@ -10,13 +10,7 @@ import {type ProductsProps} from "../types/products"
 import systemFetch from "../axios"
 
 const Home = () => {
-  /*
-  
-  O que tenho que fazer:
 
-  fazer a rota de cadastro e login
-  
-  */
   const [products, setProducts] = useState<ProductsProps | null>(null)
 
   useEffect(() => {
