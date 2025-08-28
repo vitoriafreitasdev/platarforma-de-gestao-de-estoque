@@ -1,12 +1,14 @@
 const router = require("express").Router()
 const stockController = require("../controllers/stockController")
 const upload = require("../utils/upload")
+const tokenCheck = require("../utils/tokenCheck")
+
 /*
 
 adicionar um token nas rotas de postar, atualizar e deletar, apenas usuarios administradores logados podem  fazer isso.
 
 */ 
-router.route("/estoque").post(upload.single("image"), (req, res, next) => {
+router.route("/estoque").post(tokenCheck, upload.single("image"), (req, res, next) => {
     const image = req.file 
 
     if(!image) {
@@ -16,8 +18,8 @@ router.route("/estoque").post(upload.single("image"), (req, res, next) => {
 }, stockController.create)
 router.route("/estoque").get((req, res) => stockController.getAllProducts(req, res))
 router.route("/estoque/:id").get((req, res) => stockController.getOneProduct(req, res))
-router.route("/estoque/:id").patch(upload.single("image"), (req, res) => stockController.edit(req, res))
-router.route("/estoque/:id").delete((req, res) => stockController.delete(req, res))
+router.route("/estoque/:id").patch(tokenCheck, upload.single("image"), (req, res) => stockController.edit(req, res))
+router.route("/estoque/:id").delete(tokenCheck, (req, res) => stockController.delete(req, res))
 
 
 module.exports = router

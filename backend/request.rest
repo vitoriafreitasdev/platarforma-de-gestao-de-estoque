@@ -1,23 +1,24 @@
 POST http://localhost:3000/estoque
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YWNjNTYyMmFlYzVhZDNkNTRhOGQ3MCIsImlhdCI6MTc1NjM4ODQzOX0.YaNQPcJk8rdO4WGHgF-6_9ovAvCDCU7d7n6Trxol9mw
 Content-Type: multipart/form-data; boundary=----MyBoundary
 
 ------MyBoundary
 Content-Disposition: form-data; name="image"; filename="3090.jpg"
 Content-Type: image/jpeg
 
-< C:/Users/vitor/OneDrive/Imagens/Saved Pictures/monitor.jpg
+< C:/Users/vitor/OneDrive/Imagens/Saved Pictures/teclado.jpeg
 ------MyBoundary
 Content-Disposition: form-data; name="name"
 
-KOORUI Monitor
+Teclado Mecânico
 ------MyBoundary
 Content-Disposition: form-data; name="unitsAvailable"
 
-11
+12
 ------MyBoundary
 Content-Disposition: form-data; name="priceUnit"
 
-1700
+219
 ------MyBoundary
 Content-Disposition: form-data; name="isAvailable"
 
@@ -28,15 +29,18 @@ true
 
 
 ###
-PATCH http://localhost:3000/estoque/68af2172e9c69a38ec310f10
+PATCH http://localhost:3000/estoque/68b05cab5e437deec45de3f0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YWNjNTYyMmFlYzVhZDNkNTRhOGQ3MCIsImlhdCI6MTc1NjM4ODQzOX0.YaNQPcJk8rdO4WGHgF-6_9ovAvCDCU7d7n6Trxol9mw
 Content-Type: multipart/form-data; boundary=----MyBoundary
 
 ------MyBoundary
-Content-Disposition: form-data; name="name"
+Content-Disposition: form-data; name="unitsAvailable"
 
-PS5 Slim
+13
 ------MyBoundary--
 
 ###
 
-DELETE  http://localhost:3000/estoque/68af35b4833e1d4080f93d90
+DELETE  http://localhost:3000/estoque/68b05c6483cfdd36e27d6c1e
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YWNjNTYyMmFlYzVhZDNkNTRhOGQ3MCIsImlhdCI6MTc1NjM4ODQzOX0.YaNQPcJk8rdO4WGHgF-6_9ovAvCDCU7d7n6Trxol9mw
+Content-Type: multipart/form-data; boundary=----MyBoundary
