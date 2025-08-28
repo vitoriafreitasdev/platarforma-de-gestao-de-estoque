@@ -1,20 +1,23 @@
 .home{
-    margin: 1rem;
     padding: 0.5rem;
+    padding-bottom: 5rem;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    background-color: #29339B;
+    height: 100%;
 }
 .home h2 {
     padding: 1rem;
     margin: 1rem;
+    color: #F0F7EE;
 }
 table{
     width: 80vw;
     border-collapse: collapse;
     position: relative;
-    background-color: #D2D6EF;
+    background-color: #F0F7EE;
 }
 td, th{
     border: 1px solid black;

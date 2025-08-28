@@ -1,6 +1,7 @@
 const User = require("../models/User")
 const jwt = require("jsonwebtoken")
 const bcrypt = require('bcrypt')
+const adminkey = require("../adminkey")
 
 require("dotenv").config()
 const secret = process.env.SECRET
@@ -9,7 +10,7 @@ const secret = process.env.SECRET
 const userController = {
     register: async (req, res) =>{
         try {
-            const {name, email, password, confirmPassword, role} = req.body 
+            const {name, email, password, confirmPassword, role, key} = req.body 
 
             const userExist = await User.findOne({email: email})
 
@@ -17,7 +18,7 @@ const userController = {
                 return res.status(422).json({msg: "Utilize outro email esse já existe."})
             }
 
-            if(password !== confirmPassword) return res.status(422).json({msg: "Senha diferentes."})
+            if(password !== confirmPassword) return res.status(422).json({msg: "Senhas diferentes."})
             
             function validarEmail(email) {
                 let re = /^\S+@\S+\.\S+$/;
@@ -34,6 +35,12 @@ const userController = {
                     email: email,
                     password: passwordCrypt,
                     role: role
+                }
+
+                if(user.role === "Admin") {
+                    if(key !== adminkey){
+                        return res.status(422).json({msg: "Chave para administradores errada."})
+                    }
                 }
 
                 const response = await User.create(user)
