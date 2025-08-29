@@ -25,7 +25,7 @@ const Home = () => {
       console.log(error)
     }
   }, [])
-
+  
   return (
     <div className={classes.home}>
         <h2>Produtos no estoque: </h2> 
