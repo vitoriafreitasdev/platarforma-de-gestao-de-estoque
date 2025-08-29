@@ -78,7 +78,7 @@ const userController = {
                 secret
             )
 
-            res.status(200).json({msg: "Login feito com sucesso", token, id})
+            res.status(200).json({msg: "Login feito com sucesso", token, id, user})
         } catch (error) {
             console.log(error)
             res.status(500).json({msg: "Erro no sistema, tente novamente mais tarde."})

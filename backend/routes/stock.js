@@ -3,11 +3,7 @@ const stockController = require("../controllers/stockController")
 const upload = require("../utils/upload")
 const tokenCheck = require("../utils/tokenCheck")
 
-/*
 
-adicionar um token nas rotas de postar, atualizar e deletar, apenas usuarios administradores logados podem  fazer isso.
-
-*/ 
 router.route("/estoque").post(tokenCheck, upload.single("image"), (req, res, next) => {
     const image = req.file 
 

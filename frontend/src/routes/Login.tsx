@@ -4,7 +4,7 @@ import classes from "./Login.module.css"
 import type { UserLogin } from "../types/userLogin"
 import systemFetch from "../axios"
 
-
+import { useNavigate } from "react-router-dom"
 const Login = () => {
 
   const [email, setEmail] = useState<string>("")
@@ -13,6 +13,8 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false)
 
   const [error, setError] = useState<string>("")
+
+  const navigate = useNavigate()
 
   const showhidePassword = () => {
     setShowPassword(!showPassword)
@@ -35,7 +37,11 @@ const Login = () => {
 
       setError("")
 
-      console.log(res)
+      console.log(res.data.user.role, res)
+
+      if(res.data.user.role === "Admin") navigate(`/admin/${res.data.id}`)
+      if(res.data.user.role === "Requester") navigate(`/requester/${res.data.id}`)
+    
     } catch (error: any) {
       setError(error.response.data.msg)
       console.log(error)
