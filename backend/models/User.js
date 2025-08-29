@@ -22,7 +22,7 @@ const userSchema = new Schema(
             required: true
         },
         products: {
-            type: [StockSchema]
+            type: []
         }
     },
     {timestamps: true}

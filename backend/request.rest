@@ -1,5 +1,22 @@
+DELETE http://localhost:3000/user/68b1ed11b29724410b641a6a/deleteproducts
+Content-Type: application/json
+
+{
+    "productId": "68af34d4833e1d4080f93d8d"
+}
+
+###
+PATCH  http://localhost:3000/user/68b1ed11b29724410b641a6a/addproducts
+Content-Type: application/json
+
+{
+    "productId": "68af34d4833e1d4080f93d8d"
+}
+
+
+###
 POST http://localhost:3000/estoque
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YWNjNTYyMmFlYzVhZDNkNTRhOGQ3MCIsImlhdCI6MTc1NjM4ODQzOX0.YaNQPcJk8rdO4WGHgF-6_9ovAvCDCU7d7n6Trxol9mw
+
 Content-Type: multipart/form-data; boundary=----MyBoundary
 
 ------MyBoundary
@@ -44,3 +61,17 @@ Content-Disposition: form-data; name="unitsAvailable"
 DELETE  http://localhost:3000/estoque/68b05c6483cfdd36e27d6c1e
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YWNjNTYyMmFlYzVhZDNkNTRhOGQ3MCIsImlhdCI6MTc1NjM4ODQzOX0.YaNQPcJk8rdO4WGHgF-6_9ovAvCDCU7d7n6Trxol9mw
 Content-Type: multipart/form-data; boundary=----MyBoundary
+
+
+###
+
+POST http://localhost:3000/user/register
+Content-Type: application/json
+
+{
+    "name": "jp",
+    "email": "jp@gmail.com",
+    "password": "1234",
+    "confirmPassword": "1234",
+    "role": "Requester"
+}
