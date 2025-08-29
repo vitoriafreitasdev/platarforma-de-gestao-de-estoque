@@ -5,7 +5,7 @@ import type { UserRegisterProps } from "../types/userRegister"
 import classes from "./Cadastro.module.css"
 import type { ChangeEvent } from 'react';
 import { useState} from "react"
-
+import { useNavigate } from "react-router-dom";
 
 const Cadastro = () => {
 
@@ -14,10 +14,16 @@ const Cadastro = () => {
   const [password, setPassword] = useState<string>("")
   const [confirmPassword, setConfirmPassword] = useState<string>("")
   const [role, setRole] = useState<string>("Requester")
+
   const [showPassword, setShowPassword] = useState<boolean>(false)
+
   const [showKeyInput, setshowKeyInput] = useState<boolean>(false)
+
   const [keyAdmin, setKeyAdmin] = useState<string>("")
+  
   const [error, setError] = useState<string>("")
+
+  const navigate = useNavigate()
 
  const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
     setRole(event.target.value);
@@ -31,7 +37,7 @@ const Cadastro = () => {
   
 };
 
-/* Agora fazer a rota para o login */
+
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -47,9 +53,10 @@ const Cadastro = () => {
         key: keyAdmin
       }
 
-      const res = await systemFetch.post("/user/register", user)
+      await systemFetch.post("/user/register", user)
       setError("")
-      console.log(res)
+      navigate("/login")
+        
     } catch (error: any ) {
       setError(error.response.data.msg)
       console.log(error)
@@ -66,7 +73,7 @@ const Cadastro = () => {
 
         <div>
               <p>{error}</p>
-              <form onSubmit={(event) => handleSubmit(event)}>
+              <form onSubmit={handleSubmit}>
                   <label>
                       <h2>Seu nome:</h2>
                       <input type="text" onChange={(e) =>  setName(e.target.value)} required/>
@@ -74,7 +81,7 @@ const Cadastro = () => {
 
                   <label>
                       <h2>E-mail:</h2>
-                      <input type="text" onChange={(e) =>  setEmail(e.target.value)} required/>
+                      <input type="email" onChange={(e) =>  setEmail(e.target.value)} required/>
                   </label>
 
                   <label>

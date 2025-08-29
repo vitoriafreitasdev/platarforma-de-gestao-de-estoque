@@ -65,7 +65,7 @@ const userController = {
                 return res.status(404).json({msg: "Email não encontrado."})
             }
 
-            const comparedPassword = bcrypt.compare(password, user.password)
+            const comparedPassword = await bcrypt.compare(password, user.password)
 
             if(!comparedPassword) return res.status(422).json({msg: "Senha inválida"})
     

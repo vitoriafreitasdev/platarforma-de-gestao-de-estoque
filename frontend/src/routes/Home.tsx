@@ -25,10 +25,11 @@ const Home = () => {
       console.log(error)
     }
   }, [])
-console.log(products)
+
   return (
     <div className={classes.home}>
         <h2>Produtos no estoque: </h2> 
+        <h3>Cadastre-se para poder fazer a encomenda.</h3>
         <div className={classes.productscontainer}>
           
           {
