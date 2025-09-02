@@ -1,0 +1,28 @@
+.requestercontainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.requestercontainer h2{
+    margin: 0.5rem;
+}
+
+.productscontainer{
+    display: flex;
+    width: 100%;
+    
+}
+
+.productscontainer img {
+    width: 75%;
+    height: 250px;
+    object-fit: contain;
+}
+
+.productscontainer > div > p {
+    margin: 0.5rem;
+}
+
+.productscontainer > div > p > span {
+    font-weight: bold;
+}

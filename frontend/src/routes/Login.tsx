@@ -32,15 +32,16 @@ const Login = () => {
       const res = await systemFetch.post("/user/login", user)
 
       const token = res.data.token 
-
+      const id = res.data.id
       localStorage.setItem("token", token)
+      localStorage.setItem("idUser", id)
 
       setError("")
 
       console.log(res.data.user.role, res)
 
-      if(res.data.user.role === "Admin") navigate(`/admin/${res.data.id}`)
-      if(res.data.user.role === "Requester") navigate(`/requester/${res.data.id}`)
+      if(res.data.user.role === "Admin") navigate(`/admin/${id}`)
+      if(res.data.user.role === "Requester") navigate(`/requester/${id}`)
     
     } catch (error: any) {
       setError(error.response.data.msg)

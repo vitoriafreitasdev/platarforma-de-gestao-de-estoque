@@ -46,3 +46,15 @@ td p {
     align-items: center;
     justify-content: center;
 }
+
+.addproducts{
+    width: 250px;
+    margin: 0.5rem;
+    background-color: #006494;
+    border: none;
+    color: white;
+}
+
+.addproducts:hover{
+    background-color: #03618d;
+}
