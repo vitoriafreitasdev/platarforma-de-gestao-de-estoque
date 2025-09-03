@@ -74,6 +74,7 @@ const stockController = {
             if (req.body.unitsAvailable) editProduct.unitsAvailable = req.body.unitsAvailable
             if (req.body.priceUnit) editProduct.priceUnit = req.body.priceUnit
             if (req.body.isAvailable) editProduct.isAvailable = req.body.isAvailable
+            oldProduct.unitsAvailable === 0.1 ? editProduct.isAvailable = false : true
 
             const product = await Stock.findByIdAndUpdate(id, editProduct, {new: true})
 

@@ -3,6 +3,7 @@ import type { JSX } from "react/jsx-runtime"
 
 export type ProductsProps = 
     {
+        forEach(arg0: (p: any) => number): unknown
         filter(arg0: (p: any) => boolean): string[]
         src: string,
         map(arg0: (p: ProductsProps) => JSX.Element): import("react").ReactNode

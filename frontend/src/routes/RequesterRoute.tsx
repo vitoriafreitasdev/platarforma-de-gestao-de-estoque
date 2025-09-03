@@ -10,18 +10,16 @@ const RequesterRoute = () => {
     const [products, setProducts] = useState<ProductsProps | null>(null)
     const [loading, setloading] = useState<boolean>(false)
 
-
     const [error, setError] = useState<string>("")
     const {id} = useParams()
 
     
 
     useLayoutEffect(() => {
-
+       
         const loaduser = async () => {
             try {
                 const res = await systemFetch(`user/${id}`)
-
                 setUser(res.data)
             } catch (error: any) {
                 setError(error.response.data.msg)
@@ -44,13 +42,13 @@ const RequesterRoute = () => {
     const filtered: string[][]  = []
     if (products && user){
     
-      user.products.forEach((pUser: { productId: any }) => {
+      user.products.forEach((pUser: { productID: any }) => {
         
-        productsFilter = products.filter(p => p._id === pUser.productId)
+        productsFilter = products.filter(p => p._id === pUser.productID)
         filtered.push(productsFilter)
       })
-   
-
+      
+      
     }
 
   return (
