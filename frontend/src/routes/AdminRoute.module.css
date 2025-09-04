@@ -1,0 +1,28 @@
+.admincontainer{
+
+}
+
+.productmaincontainer{
+
+}
+
+.productdiv{
+
+}
+
+.productdiv img{
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+}
+.btnEdit{
+    width: 50px;
+    height: 20px;
+    background-color: green;
+}
+
+.btnDelete{
+    width: 50px;
+    height: 20px;
+    background-color: red;
+}

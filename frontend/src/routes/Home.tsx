@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 
 import classes from "./Home.module.css"
@@ -12,6 +13,7 @@ import { Link } from "react-router-dom"
 const Home = () => {
 
   const [products, setProducts] = useState<ProductsProps | null>(null)
+  const [user, setUser] = useState<any>(null)
   const [isLogged, setIsLogged] = useState<boolean>(false)
   const [idUser, setIdUser] = useState<string | null>(null)
   const [addAnswer, setAddAnswer] = useState<string | null>(null)
@@ -24,6 +26,7 @@ const Home = () => {
           const res = await systemFetch.get("/estoque")
           setProducts(res.data)
         }
+        
         loadProducts()
 
         const token = localStorage.getItem("token")
@@ -32,6 +35,18 @@ const Home = () => {
         if(token && userId) {
           setIsLogged(true)
           setIdUser(userId)
+            const loaduser = async () => {
+              try {
+                  const res = await systemFetch.get(`/user/${userId}`)
+                  setUser(res.data)
+                  
+              } catch (error: any) {
+                 
+                  console.log(error)
+              }
+            }
+            loaduser()
+        
         }  else {
           setIsLogged(false)
         }
@@ -75,12 +90,12 @@ const Home = () => {
     }
     
   }
-  
+
   return (
     <div className={classes.home}>
         <h2>Produtos no estoque: </h2> 
         <h3>{!isLogged && "Faça o login para poder fazer encomendas."}</h3>
-        {isLogged ? <Link className={classes.link} to={`/requester/${idUser}`}>Voltar</Link> : ""}
+        {isLogged && user ? <Link className={classes.link} to={user.role === "Admin" ? `/admin/${idUser}` : `/requester/${idUser}`}>Voltar</Link> : ""}
         <div className={classes.productscontainer}>
           {addAnswer ? <p>{addAnswer}</p> : ""}
           {
@@ -122,4 +137,5 @@ const Home = () => {
 }
 
 export default Home
+
 
