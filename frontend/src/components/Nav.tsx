@@ -1,4 +1,4 @@
-import { NavLink, useParams } from "react-router-dom"
+import { NavLink, useParams, useNavigate } from "react-router-dom"
 import classes from "./Nav.module.css"
 import { useState, useLayoutEffect } from "react"
 
@@ -7,6 +7,8 @@ const Nav = () => {
 
   const {id} = useParams()
  
+  const navigate = useNavigate()
+
   useLayoutEffect(() => {
     
     const token = localStorage.getItem("token")
@@ -22,6 +24,7 @@ const Nav = () => {
     localStorage.removeItem("token")
     localStorage.removeItem("idUser")
     setIsLogged(false)
+    navigate("/login")
   }
  
   return (

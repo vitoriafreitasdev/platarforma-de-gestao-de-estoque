@@ -7,7 +7,7 @@ import { useState, useLayoutEffect } from "react"
 import {type ProductsProps} from "../types/products"
 
 import systemFetch from "../axios"
-
+import { Link } from "react-router-dom"
 
 const Home = () => {
 
@@ -80,6 +80,7 @@ const Home = () => {
     <div className={classes.home}>
         <h2>Produtos no estoque: </h2> 
         <h3>{!isLogged && "Faça o login para poder fazer encomendas."}</h3>
+        {isLogged ? <Link className={classes.link} to={`/requester/${idUser}`}>Voltar</Link> : ""}
         <div className={classes.productscontainer}>
           {addAnswer ? <p>{addAnswer}</p> : ""}
           {

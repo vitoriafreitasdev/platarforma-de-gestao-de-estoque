@@ -1,12 +1,29 @@
 .home{
     padding: 0.5rem;
-    padding-bottom: 5rem;
+    padding-top: 2rem;
+    padding-bottom: 8rem;
+    
+    background-color: #29339B;
+    height: 100%;
+
+}
+.home h2, h3 {
+    text-align: center;
+}
+.link{
+    color: black;
+    text-decoration: none;
+    background-color: #F0F7EE;
+    padding: 5px;
+    margin: 1rem;
+    margin-left: 9rem;
+
+}
+.productscontainer{
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    background-color: #29339B;
-    height: 100%;
 }
 .home h2, h3 {
     padding: 1rem;
@@ -58,3 +75,4 @@ td p {
 .addproducts:hover{
     background-color: #03618d;
 }
+
