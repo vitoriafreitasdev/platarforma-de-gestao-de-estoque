@@ -1,6 +1,7 @@
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useLayoutEffect } from "react"
-import { useParams } from "react-router-dom"
+import { useParams, Link } from "react-router-dom"
 import systemFetch from "../axios"
 import type { ProductsProps } from "../types/products"
 
@@ -41,24 +42,34 @@ const AdminRoute = () => {
   return (
     <div className={classes.admincontainer}>
         {!error ? 
-        <div className={classes.productscontainer}>
+        <div>
             {admin && <h2>Ola, {admin.name}. Os produtos disponíveis no estoque são:</h2>}
-            <div className={classes.productmaincontainer}>
+            <div className={classes.productscontainer}>
+            
+            
                     { products && products.map((p) => (
-                        <div className={classes.productdiv}>
-                            <div><img src={`${systemFetch.defaults.baseURL}/${p.src}`} alt="" /></div>
-                            <div>
-                                {p.name}
-                                {p.priceUnit}
-                                {p.unitsAvailable}
-                                {p.isAvailable ? "sim" : "não"}
-                                <button className={classes.btnEdit}>Editar</button>
-                                <button className={classes.btnDelete}>deletar</button>
+                        
+                            <div className={classes.productdiv}>
+                                <div className={classes.productimg}><img src={`${systemFetch.defaults.baseURL}/${p.src}`} alt="" /></div>
+                                <div className={classes.productitems}>
+                                    <p>Nome: <span>{p.name}</span></p>
+                                    <p>Preço: <span>{p.priceUnit}</span></p>
+                                    <p>Unidades disponíveis: <span>{p.unitsAvailable}</span></p>
+                                    <p>Disponível: <span>{p.isAvailable ? "sim" : "não"}</span></p>
+                                    <Link className={classes.linkedit} to={`/productedit/${p._id}`}><button className={classes.btnEdit}>Editar</button></Link>
+                                    
+                                    <button className={classes.btnDelete}>Deletar</button>
+                                </div>
                             </div>
-                        </div>
+                        
                     ) )}
+            </div> 
+            <div>
+                <Link className={classes.linkedit} to={"/addproducts"}><button className={classes.btnAdd}>Adicionar produtos</button></Link>
             </div>
-        </div> 
+
+        </div>
+        
         : <p>{error}</p>}        
     </div>
   )

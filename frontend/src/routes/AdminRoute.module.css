@@ -1,28 +1,83 @@
-.admincontainer{
-
+/* AdminRoute.module.css */
+.admincontainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh; 
+  background-color: #29339B;
+  padding: 20px;
+}
+.admincontainer h2{
+    text-align: center;
+    margin: 1rem;
+    color: #fff;
+}
+.productscontainer {
+  display: flex;
+  flex-wrap: wrap; 
+  justify-content: center;
+  gap: 40px; 
+  border: 3px solid black; 
+  padding: 20px;
+  width: 90%;
+  max-width: 1200px;
+  background-color: #006494;
 }
 
-.productmaincontainer{
-
+.productdiv {
+  display: flex;
+  align-items: flex-start;
+  border: 3px solid black; 
+  padding: 10px;
+  gap: 15px;
+  width: 250px;
+  background-color: #fff;
 }
 
-.productdiv{
-
+.productimg img {
+  width: 80px;
+  height: 80px;
+  border: 2px solid #29339B; 
+  object-fit: contain;
 }
 
-.productdiv img{
-    width: 100px;
-    height: 100px;
-    object-fit: contain;
+.productitems {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  
 }
-.btnEdit{
-    width: 50px;
-    height: 20px;
-    background-color: green;
+.productitems p {
+    margin: 2px;
+}
+.productitems span{
+    font-weight: bold;
 }
 
-.btnDelete{
-    width: 50px;
-    height: 20px;
-    background-color: red;
+.btnEdit, .btnDelete{
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  width: 100px;
+  margin: 0;
+}
+.btnEdit {
+  background-color: rgb(182, 120, 5);
+  margin-bottom: 0.3rem;
+}
+.linkedit{
+  text-decoration: none;
+  color: #fff;
+}
+.btnDelete {
+  background-color: rgb(168, 4, 4);
+}
+.btnAdd{
+  background-color: rgb(1, 153, 1);
+  margin: 1rem;
+  text-align: center;
+  height: 35px;
+  width: 250px;
+  color: #fff;
+  font-weight: bolder;
 }

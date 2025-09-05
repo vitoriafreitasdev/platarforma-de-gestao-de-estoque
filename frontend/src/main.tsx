@@ -8,6 +8,8 @@ import Cadastro from './routes/Cadastro.tsx'
 import Login from './routes/Login.tsx'
 import RequesterRoute from './routes/RequesterRoute.tsx'
 import AdminRoute from './routes/AdminRoute.tsx'
+import EditProduct from './routes/EditProduct.tsx'
+import AddProducts from './routes/AddProducts.tsx'
 
 const router = createBrowserRouter([
   {
@@ -33,6 +35,15 @@ const router = createBrowserRouter([
       {
         path: "/admin/:id",
         element: <AdminRoute/>
+      },
+      {
+        path: "/productedit/:id",
+        element: <EditProduct/>
+      },
+      {
+        path: "/addproducts",
+        element: <AddProducts/>
+
       }
     ]
   }
