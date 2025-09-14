@@ -17,36 +17,43 @@ const AddProducts = () => {
   const [src, setSrc] = useState<any>("")
   const [sucess, setSucess] = useState<string>("")
   
+  const add = async () => {
+      const form: datas = new FormData()
+
+      form.append("image", src)
+      form.append("name", name)
+      form.append("unitsAvailable", unitsAvailable)
+      form.append("priceUnit", priceUnit)
+      form.append("isAvailable", isAvailable)
+
+    
+
+      try {
+        const res = await systemFetch.post("/estoque", form, {
+          headers: {
+            "Content-Type": "multipart/form-data"
+          }
+        })
+
+        if (res.status === 201){
+          setSucess("Adicionado com sucesso")
+        } else{
+          setSucess("Algo deu errado tente novamente.")
+        }
+      } catch (error) {
+        console.log(error)
+      }
+  }
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault()
-    /* fazer os testes */ 
-    const form: datas = new FormData()
 
-    form.append("image", src)
-    form.append("name", name)
-    form.append("unitsAvailable", unitsAvailable)
-    form.append("priceUnit", priceUnit)
-    if (unitsAvailable > 0){
-      setIsAvailable(true)
-    }
-    form.append("isAvailable", isAvailable)
-
-    try {
-      const res = await systemFetch.post("/estoque", form, {
-        headers: {
-          "Content-Type": "multipart/form-data"
-        }
-      })
-
-      if (res.status === 201){
-        setSucess("Adicionado com sucesso")
-      } else{
-        setSucess("Algo deu errado tente novamente.")
+      if (unitsAvailable > 0){
+        setIsAvailable(true)
       }
-    } catch (error) {
-      console.log(error)
-    }
+
+      add()
+    
 
   }
   
@@ -56,19 +63,19 @@ const AddProducts = () => {
       <div className={classes.labelcontainer}>
         <label>
         <span>Nome do produto: </span>
-        <input type="text" onChange={(e) => setName(e.target.value)}/>
+        <input type="text" onChange={(e) => setName(e.target.value)} required/>
         </label>
         <label>
           <span>Unidades disponíveis: </span>
-          <input type="number" onChange={(e) => setUnitsAvailable(e.target.value)}/>
+          <input type="number" onChange={(e) => setUnitsAvailable(e.target.value)} required/>
         </label>
         <label>
           <span>Preço da unidade: </span>
-          <input type="number" onChange={(e) => setPriceUnit(e.target.value)}/>
+          <input type="text" onChange={(e) => setPriceUnit(e.target.value)} required/>
         </label>
         <label>
           <span>Imagem do Produto: </span>
-          <input type="file" onChange={(e) => setSrc(e.target.files ? e.target.files[0] : "")}/>
+          <input type="file" onChange={(e) => setSrc(e.target.files ? e.target.files[0] : "")} required/>
         </label>
         <input type="submit" value="Adicionar"/>
       </div>

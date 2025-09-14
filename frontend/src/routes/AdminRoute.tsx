@@ -45,7 +45,7 @@ const AdminRoute = () => {
         <div>
             {admin && <h2>Ola, {admin.name}. Os produtos disponíveis no estoque são:</h2>}
             <div className={classes.productscontainer}>
-            
+             {/* Fazer o botão de deletar agora  */}
             
                     { products && products.map((p) => (
                         
@@ -56,7 +56,7 @@ const AdminRoute = () => {
                                     <p>Preço: <span>{p.priceUnit}</span></p>
                                     <p>Unidades disponíveis: <span>{p.unitsAvailable}</span></p>
                                     <p>Disponível: <span>{p.isAvailable ? "sim" : "não"}</span></p>
-                                    <Link className={classes.linkedit} to={`/productedit/${p._id}`}><button className={classes.btnEdit}>Editar</button></Link>
+                                    <Link className={classes.linkedit} to={`/editproduct/${p._id}`}><button className={classes.btnEdit}>Editar</button></Link>
                                     
                                     <button className={classes.btnDelete}>Deletar</button>
                                 </div>

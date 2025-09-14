@@ -1,0 +1,57 @@
+.maincontainer{
+    background-color: #006494;
+    width: 100%;
+    height: 100vh;
+    padding: 2rem;
+    box-sizing: border-box;
+}
+.maincontainer .succesp{
+    text-align: center;
+    color: black;
+    background-color: rgb(2, 82, 2);
+    width: 30%;
+    margin: 0 auto;
+    margin-bottom: 1rem;
+    padding: 0.1rem;
+    color: #fff;
+}
+.imgproduct{
+    width: 130px;
+    height: 130px;
+    object-fit: contain;
+}
+
+.productcontainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    background-color: #ddd;
+    width: 50%;
+    margin: 0 auto;
+    margin-bottom: 1rem;
+}
+
+.editcontainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    width: 50%;
+    background-color: #fff;
+    padding: 1rem;
+}
+
+.maincontainer label, span, p, h2{
+    margin: 0.2rem;
+}
+
+.editbtn{
+    width: 150px;
+    margin: 0.1rem;
+    background-color: #006494;
+    border: none;
+    color: #fff;
+    padding: 0.2rem;
+    cursor: pointer;
+}

@@ -37,13 +37,13 @@ const router = createBrowserRouter([
         element: <AdminRoute/>
       },
       {
-        path: "/productedit/:id",
-        element: <EditProduct/>
-      },
-      {
         path: "/addproducts",
         element: <AddProducts/>
 
+      },
+      {
+        path: "/editproduct/:id",
+        element: <EditProduct/>
       }
     ]
   }
