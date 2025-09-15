@@ -35,21 +35,24 @@ const AdminRoute = () => {
 
 
         loadAdmin()
-    }, [])
+    }, [products, id])
 
 
-    console.log(products)
+    const handleDelete = async (id: string) => {
+        await systemFetch.delete(`/estoque/${id}`)
+    }
+
+
   return (
     <div className={classes.admincontainer}>
         {!error ? 
         <div>
             {admin && <h2>Ola, {admin.name}. Os produtos disponíveis no estoque são:</h2>}
             <div className={classes.productscontainer}>
-             {/* Fazer o botão de deletar agora  */}
-            
-                    { products && products.map((p) => (
+             
+                      { products && products.map((p) => (
                         
-                            <div className={classes.productdiv}>
+                            <div className={classes.productdiv} key={p._id}>
                                 <div className={classes.productimg}><img src={`${systemFetch.defaults.baseURL}/${p.src}`} alt="" /></div>
                                 <div className={classes.productitems}>
                                     <p>Nome: <span>{p.name}</span></p>
@@ -58,7 +61,7 @@ const AdminRoute = () => {
                                     <p>Disponível: <span>{p.isAvailable ? "sim" : "não"}</span></p>
                                     <Link className={classes.linkedit} to={`/editproduct/${p._id}`}><button className={classes.btnEdit}>Editar</button></Link>
                                     
-                                    <button className={classes.btnDelete}>Deletar</button>
+                                    <button className={classes.btnDelete} onClick={() => handleDelete(p._id)}>Deletar</button>
                                 </div>
                             </div>
                         

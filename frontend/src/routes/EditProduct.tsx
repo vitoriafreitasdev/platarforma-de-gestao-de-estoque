@@ -63,7 +63,7 @@ const EditProduct = () => {
       }
   }
 
-  if (product) console.log(product)
+  
   return (
     <div className={classes.maincontainer}>
       {product &&

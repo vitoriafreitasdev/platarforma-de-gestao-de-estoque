@@ -16,8 +16,9 @@ const AddProducts = () => {
   const [isAvailable, setIsAvailable] = useState<boolean>(false)
   const [src, setSrc] = useState<any>("")
   const [sucess, setSucess] = useState<string>("")
-  
+
   const add = async () => {
+      console.log(isAvailable)
       const form: datas = new FormData()
 
       form.append("image", src)
@@ -40,6 +41,8 @@ const AddProducts = () => {
         } else{
           setSucess("Algo deu errado tente novamente.")
         }
+        
+
       } catch (error) {
         console.log(error)
       }
@@ -47,15 +50,18 @@ const AddProducts = () => {
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault()
+    add()
+  }
 
+  const handleunits = (e: any) => {
+      setUnitsAvailable(e)
       if (unitsAvailable > 0){
         setIsAvailable(true)
+      } else{
+        setIsAvailable(false)
       }
-
-      add()
-    
-
   }
+
   
   return (
     <form className={classes.formcontainer} onSubmit={handleSubmit}>
@@ -67,7 +73,7 @@ const AddProducts = () => {
         </label>
         <label>
           <span>Unidades disponíveis: </span>
-          <input type="number" onChange={(e) => setUnitsAvailable(e.target.value)} required/>
+          <input type="number" onChange={(e) => handleunits(e.target.value)} required/>
         </label>
         <label>
           <span>Preço da unidade: </span>
