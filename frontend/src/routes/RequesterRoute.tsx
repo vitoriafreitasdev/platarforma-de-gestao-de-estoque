@@ -7,84 +7,109 @@ import classes from "./RequesterRoute.module.css"
 
 const RequesterRoute = () => {
     const [user, setUser] = useState<any>(null)
-    const [products, setProducts] = useState<ProductsProps | null>(null)
+    const [products, setProducts] = useState<ProductsProps[] | null>(null) // Alterado para array
     const [loading, setloading] = useState<boolean>(false)
-
     const [error, setError] = useState<string>("")
     const {id} = useParams()
 
-    
-
     useLayoutEffect(() => {
-       
-        const loaduser = async () => {
+        const loadData = async () => {
+            setloading(true)
             try {
-                const res = await systemFetch(`user/${id}`)
-                setUser(res.data)
+                // Carrega dados em paralelo
+                const [userRes, productsRes] = await Promise.all([
+                    systemFetch(`user/${id}`),
+                    systemFetch.get("/estoque")
+                ])
+                
+                setUser(userRes.data)
+                setProducts(productsRes.data)
             } catch (error: any) {
-                setError(error.response.data.msg)
+                setError(error.response?.data?.msg || "Erro ao carregar dados")
                 console.log(error)
+            } finally {
+                setloading(false)
             }
         }
-        const loadProducts = async () => {
-          const res = await systemFetch.get("/estoque")
-          setProducts(res.data)
+
+        loadData()
+    }, [id]) // Adicionado id como dependência
+
+    // Calcula produtos do usuário e produtos diferentes
+    const userProducts = user?.products
+        ?.map((pUser: { productID: string }) => 
+            products?.find(p => p._id === pUser.productID)
+        )
+        .filter(Boolean) || [] // Remove undefined values
+
+    const productsDifferent = products
+        ?.filter(p => !userProducts.some((up: { _id: string }) => up._id === p._id)) || []
+
+    const totalprice = userProducts.reduce((total: number, product: any) => 
+        total + (product.priceUnit || 0), 0
+    )
+
+    const handleDelete = async (productID: string) => {
+        try {
+            // Implemente a lógica de deleção aqui
+            console.log("Deletando produto:", productID)
+            // await systemFetch.delete(`/user/${id}/products/${productID}`)
+            // Recarregar dados após deleção
+        } catch (error) {
+            console.error("Erro ao deletar produto:", error)
         }
-
-        setloading(true)
-
-        loadProducts()
-        loaduser()
-
-        setloading(false)
-    }, [])
-    let productsFilter: Array<string> 
-    const filtered: string[][]  = []
-    if (products && user){
-    
-      user.products.forEach((pUser: { productID: any }) => {
-        
-        productsFilter = products.filter(p => p._id === pUser.productID)
-        filtered.push(productsFilter)
-      })
-      
-      
     }
 
-  return (
-    <div className={classes.requestercontainer}>
-        
-        {!error ? 
-  
-          <div>
-            <h2>{filtered.length > 0 ? "Seus produtos:" : "Você não tem produtos."}</h2>
-            {
-              !loading ? 
-                  <div className={classes.productscontainer}>
+    return (
+        <div className={classes.requestercontainer}>
+            {error ? (
+                <p>{error}</p>
+            ) : (
+                <div>
+                    <h2>{userProducts.length > 0 ? "Seus produtos:" : "Você não tem produtos."}</h2>
                     
-                    {
-                      filtered.length > 0 && filtered.map((f: any[]) => (
-                      f.map((filter: { name: string, unitsAvailable: number, priceUnit: number, src: string }) => (
-                        <div >
-                          <p><span>Nome:</span> {filter.name}</p>
-                          <p><span>Unidades:</span> {filter.unitsAvailable}</p>
-                          <p><span>Preço por unidades:</span> {filter.priceUnit}</p>
-                          <p><img  src={`${systemFetch.defaults.baseURL}/${filter.src}`} alt="teste" /></p>
+                    {loading ? (
+                        <p>Carregando...</p>
+                    ) : (
+                        <div className={classes.productscontainer}>
+                            {userProducts.map((product: any) => (
+                                <div key={product._id}>
+                                    <p><span>Nome:</span> {product.name}</p>
+                                    <p><span>Unidades:</span> {product.unitsAvailable}</p>
+                                    <p><span>Preço por unidades:</span> {product.priceUnit}</p>
+                                    <p>
+                                        <img 
+                                            src={`${systemFetch.defaults.baseURL}/${product.src}`} 
+                                            alt={product.name} 
+                                        />
+                                    </p>
+                                    <button onClick={() => handleDelete(product._id)}>
+                                        Deletar
+                                    </button>
+                                </div>
+                            ))}
+                            
+                            <p>Preço total: {totalprice}</p>
+                            
+                            {/* Exibir produtos diferentes se necessário */}
+                            {productsDifferent.length > 0 && (
+                                <div>
+                                    <h3>Produtos disponíveis:</h3>
+                                    {productsDifferent.map(product => (
+                                        <div key={product._id}>
+                                            <p>{product.name}</p>
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
                         </div>
-                      ))
-                    ))
-                    }
-                  </div>
-              
-               : 
-
-                  <p>Carregando...</p>
-               
-            }
-            <p>Para adicionar produtos: <Link to="/">Home</Link></p>
-          </div>
-        : <p>{error}</p>}        
-    </div>
-  )
+                    )}
+                    
+                    <p>Para adicionar produtos: <Link to="/">Home</Link></p>
+                </div>
+            )}        
+        </div>
+    )
 }
+
 export default RequesterRoute
