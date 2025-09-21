@@ -2,7 +2,7 @@ DELETE http://localhost:3000/user/68b88066f1ed134781c97d74/deleteproducts
 Content-Type: application/json
 
 {
-    "productID": "68cafc65951c73cba73ee9c6"
+    "productID": "68c87ce57ad799c86eb07672"
 }
 
 ###

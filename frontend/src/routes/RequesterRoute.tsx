@@ -35,13 +35,17 @@ const RequesterRoute = () => {
         loadData()
     }, [id]) // Adicionado id como dependência
 
-    // Calcula produtos do usuário e produtos diferentes
+    
+    // Descrição: "Para cada produto do usuário, encontre o produto correspondente no array completo de produtos"
     const userProducts = user?.products
         ?.map((pUser: { productID: string }) => 
             products?.find(p => p._id === pUser.productID)
         )
         .filter(Boolean) || [] // Remove undefined values
 
+    // o ! é para pegar apenas os diferentes
+    //aqui ele vai fazer um filtro nos que retorna true, que no caso vai ser os diferentes por conta do !
+    // Descrição: "Filtre os produtos, mantendo apenas aqueles que NÃO estão presentes na lista de produtos do usuário"
     const productsDifferent = products
         ?.filter(p => !userProducts.some((up: { _id: string }) => up._id === p._id)) || []
 
@@ -51,10 +55,9 @@ const RequesterRoute = () => {
 
     const handleDelete = async (productID: string) => {
         try {
-            // Implemente a lógica de deleção aqui
-            console.log("Deletando produto:", productID)
-            // await systemFetch.delete(`/user/${id}/products/${productID}`)
-            // Recarregar dados após deleção
+            console.log(productID)
+            // const res = await systemFetch.delete(`/user/${id}/deleteproducts`, {productID: productID})
+            // console.log(res.data.msg)
         } catch (error) {
             console.error("Erro ao deletar produto:", error)
         }
@@ -72,7 +75,8 @@ const RequesterRoute = () => {
                         <p>Carregando...</p>
                     ) : (
                         <div className={classes.productscontainer}>
-                            {userProducts.map((product: any) => (
+                            <div>
+                                {userProducts.map((product: any) => (
                                 <div key={product._id}>
                                     <p><span>Nome:</span> {product.name}</p>
                                     <p><span>Unidades:</span> {product.unitsAvailable}</p>
@@ -88,20 +92,26 @@ const RequesterRoute = () => {
                                     </button>
                                 </div>
                             ))}
+                            <p>Preço total: {totalprice}R$</p>
+                            </div>
                             
-                            <p>Preço total: {totalprice}</p>
                             
-                            {/* Exibir produtos diferentes se necessário */}
-                            {productsDifferent.length > 0 && (
+                            <div className={classes.differentproductscontainer}>
+                                
+                                {productsDifferent.length > 0 && (
                                 <div>
-                                    <h3>Produtos disponíveis:</h3>
+                                    <h4>Produtos que não estão mais disponíveis</h4>
                                     {productsDifferent.map(product => (
                                         <div key={product._id}>
                                             <p>{product.name}</p>
+                                    <button onClick={() => handleDelete(product._id)}>
+                                        Deletar
+                                    </button>
                                         </div>
                                     ))}
                                 </div>
                             )}
+                            </div>
                         </div>
                     )}
                     
