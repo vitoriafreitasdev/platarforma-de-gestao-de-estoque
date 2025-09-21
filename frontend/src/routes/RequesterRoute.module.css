@@ -2,7 +2,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
+    height: 100vh;
 }
 .requestercontainer h2{
     margin: 0.5rem;
